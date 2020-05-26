@@ -1,0 +1,10 @@
+.autotest
+History.txt
+Manifest.txt
+README.md
+Rakefile
+lib/rsql_ruby.rb
+test/rsql_ruby/test_rsql.rb
+test/rsql_ruby/test_fiql.rb
+lib/rsql_ruby/lexer.rex
+lib/rsql_ruby/parser.y

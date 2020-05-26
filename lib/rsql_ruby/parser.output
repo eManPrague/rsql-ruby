@@ -1,0 +1,353 @@
+
+
+-------- Grammar --------
+
+rule 1 target: disjunction
+rule 2 disjunction: conjuction OR_COMMA_OPERATOR disjunction
+rule 3 disjunction: conjuction
+rule 4 conjuction: constraint AND_OPERATOR conjuction
+rule 5 conjuction: constraint
+rule 6 constraint: selector COMPARATOR argument
+rule 7 constraint: selector
+rule 8 constraint: OPENING_BRACKET disjunction CLOSING_BRACKET
+rule 9 selector: UNRESERVED
+rule 10 argument: array
+rule 11 argument: value
+rule 12 array: OPENING_BRACKET contents CLOSING_BRACKET
+rule 13 array: OPENING_BRACKET CLOSING_BRACKET
+rule 14 contents: value
+rule 15 contents: contents OR_COMMA_OPERATOR value
+rule 16 value: UNRESERVED
+rule 17 value: SINGLE_QUOTE SINGLE_QUOTED_STRING SINGLE_QUOTE
+rule 18 value: DOUBLE_QUOTE DOUBLE_QUOTED_STRING DOUBLE_QUOTE
+
+------- Symbols -------
+
+**Nonterminals, with rules where they appear
+
+  $start (14)
+    on right: 
+    on left : 
+  target (15)
+    on right: 
+    on left : 1
+  disjunction (16)
+    on right: 1 2 8
+    on left : 2 3
+  conjuction (17)
+    on right: 2 3 4
+    on left : 4 5
+  constraint (18)
+    on right: 4 5
+    on left : 6 7 8
+  selector (19)
+    on right: 6 7
+    on left : 9
+  argument (20)
+    on right: 6
+    on left : 10 11
+  array (21)
+    on right: 10
+    on left : 12 13
+  value (22)
+    on right: 11 14 15
+    on left : 16 17 18
+  contents (23)
+    on right: 12 15
+    on left : 14 15
+
+**Terminals, with rules where they appear
+
+  $end (0) 
+  error (1) 
+  ";" (2) 
+  "," (3) 
+  OR_COMMA_OPERATOR (4) 2 15
+  AND_OPERATOR (5) 4
+  COMPARATOR (6) 6
+  OPENING_BRACKET (7) 8 12 13
+  CLOSING_BRACKET (8) 8 12 13
+  UNRESERVED (9) 9 16
+  SINGLE_QUOTE (10) 17
+  SINGLE_QUOTED_STRING (11) 17
+  DOUBLE_QUOTE (12) 18
+  DOUBLE_QUOTED_STRING (13) 18
+
+--------- State ---------
+
+state 0
+
+
+  OPENING_BRACKET  shift, and go to state 6
+  UNRESERVED    shift, and go to state 7
+
+  target        go to state 1
+  disjunction   go to state 2
+  conjuction    go to state 3
+  constraint    go to state 4
+  selector      go to state 5
+
+state 1
+
+
+  $end          shift, and go to state 8
+
+
+state 2
+
+   1) target : disjunction _
+
+  $default      reduce using rule 1 (target)
+
+
+state 3
+
+   2) disjunction : conjuction _ OR_COMMA_OPERATOR disjunction
+   3) disjunction : conjuction _
+
+  OR_COMMA_OPERATOR  shift, and go to state 9
+  $default      reduce using rule 3 (disjunction)
+
+
+state 4
+
+   4) conjuction : constraint _ AND_OPERATOR conjuction
+   5) conjuction : constraint _
+
+  AND_OPERATOR  shift, and go to state 10
+  $default      reduce using rule 5 (conjuction)
+
+
+state 5
+
+   6) constraint : selector _ COMPARATOR argument
+   7) constraint : selector _
+
+  COMPARATOR    shift, and go to state 11
+  $default      reduce using rule 7 (constraint)
+
+
+state 6
+
+   8) constraint : OPENING_BRACKET _ disjunction CLOSING_BRACKET
+
+  OPENING_BRACKET  shift, and go to state 6
+  UNRESERVED    shift, and go to state 7
+
+  conjuction    go to state 3
+  constraint    go to state 4
+  selector      go to state 5
+  disjunction   go to state 12
+
+state 7
+
+   9) selector : UNRESERVED _
+
+  $default      reduce using rule 9 (selector)
+
+
+state 8
+
+
+  $end          shift, and go to state 13
+
+
+state 9
+
+   2) disjunction : conjuction OR_COMMA_OPERATOR _ disjunction
+
+  OPENING_BRACKET  shift, and go to state 6
+  UNRESERVED    shift, and go to state 7
+
+  conjuction    go to state 3
+  disjunction   go to state 14
+  constraint    go to state 4
+  selector      go to state 5
+
+state 10
+
+   4) conjuction : constraint AND_OPERATOR _ conjuction
+
+  OPENING_BRACKET  shift, and go to state 6
+  UNRESERVED    shift, and go to state 7
+
+  constraint    go to state 4
+  conjuction    go to state 15
+  selector      go to state 5
+
+state 11
+
+   6) constraint : selector COMPARATOR _ argument
+
+  OPENING_BRACKET  shift, and go to state 19
+  UNRESERVED    shift, and go to state 20
+  SINGLE_QUOTE  shift, and go to state 21
+  DOUBLE_QUOTE  shift, and go to state 22
+
+  argument      go to state 16
+  array         go to state 17
+  value         go to state 18
+
+state 12
+
+   8) constraint : OPENING_BRACKET disjunction _ CLOSING_BRACKET
+
+  CLOSING_BRACKET  shift, and go to state 23
+
+
+state 13
+
+
+  $default      accept
+
+
+state 14
+
+   2) disjunction : conjuction OR_COMMA_OPERATOR disjunction _
+
+  $default      reduce using rule 2 (disjunction)
+
+
+state 15
+
+   4) conjuction : constraint AND_OPERATOR conjuction _
+
+  $default      reduce using rule 4 (conjuction)
+
+
+state 16
+
+   6) constraint : selector COMPARATOR argument _
+
+  $default      reduce using rule 6 (constraint)
+
+
+state 17
+
+  10) argument : array _
+
+  $default      reduce using rule 10 (argument)
+
+
+state 18
+
+  11) argument : value _
+
+  $default      reduce using rule 11 (argument)
+
+
+state 19
+
+  12) array : OPENING_BRACKET _ contents CLOSING_BRACKET
+  13) array : OPENING_BRACKET _ CLOSING_BRACKET
+
+  CLOSING_BRACKET  shift, and go to state 25
+  UNRESERVED    shift, and go to state 20
+  SINGLE_QUOTE  shift, and go to state 21
+  DOUBLE_QUOTE  shift, and go to state 22
+
+  contents      go to state 24
+  value         go to state 26
+
+state 20
+
+  16) value : UNRESERVED _
+
+  $default      reduce using rule 16 (value)
+
+
+state 21
+
+  17) value : SINGLE_QUOTE _ SINGLE_QUOTED_STRING SINGLE_QUOTE
+
+  SINGLE_QUOTED_STRING  shift, and go to state 27
+
+
+state 22
+
+  18) value : DOUBLE_QUOTE _ DOUBLE_QUOTED_STRING DOUBLE_QUOTE
+
+  DOUBLE_QUOTED_STRING  shift, and go to state 28
+
+
+state 23
+
+   8) constraint : OPENING_BRACKET disjunction CLOSING_BRACKET _
+
+  $default      reduce using rule 8 (constraint)
+
+
+state 24
+
+  12) array : OPENING_BRACKET contents _ CLOSING_BRACKET
+  15) contents : contents _ OR_COMMA_OPERATOR value
+
+  OR_COMMA_OPERATOR  shift, and go to state 30
+  CLOSING_BRACKET  shift, and go to state 29
+
+
+state 25
+
+  13) array : OPENING_BRACKET CLOSING_BRACKET _
+
+  $default      reduce using rule 13 (array)
+
+
+state 26
+
+  14) contents : value _
+
+  $default      reduce using rule 14 (contents)
+
+
+state 27
+
+  17) value : SINGLE_QUOTE SINGLE_QUOTED_STRING _ SINGLE_QUOTE
+
+  SINGLE_QUOTE  shift, and go to state 31
+
+
+state 28
+
+  18) value : DOUBLE_QUOTE DOUBLE_QUOTED_STRING _ DOUBLE_QUOTE
+
+  DOUBLE_QUOTE  shift, and go to state 32
+
+
+state 29
+
+  12) array : OPENING_BRACKET contents CLOSING_BRACKET _
+
+  $default      reduce using rule 12 (array)
+
+
+state 30
+
+  15) contents : contents OR_COMMA_OPERATOR _ value
+
+  UNRESERVED    shift, and go to state 20
+  SINGLE_QUOTE  shift, and go to state 21
+  DOUBLE_QUOTE  shift, and go to state 22
+
+  value         go to state 33
+
+state 31
+
+  17) value : SINGLE_QUOTE SINGLE_QUOTED_STRING SINGLE_QUOTE _
+
+  $default      reduce using rule 17 (value)
+
+
+state 32
+
+  18) value : DOUBLE_QUOTE DOUBLE_QUOTED_STRING DOUBLE_QUOTE _
+
+  $default      reduce using rule 18 (value)
+
+
+state 33
+
+  15) contents : contents OR_COMMA_OPERATOR value _
+
+  $default      reduce using rule 15 (contents)
+
