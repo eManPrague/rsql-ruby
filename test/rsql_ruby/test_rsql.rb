@@ -25,11 +25,17 @@ class TestRsqlRuby::TestRsql < Minitest::Test
         lhs: { type: :CONSTRAINT, selector: 'name', comparsion: '==', argument: 'Kill;"name"=gt=Bill' },
         rhs: { type: :CONSTRAINT, selector: 'year', comparsion: '=gt=', argument: '2003' },
       },
-      'name=in=(\'sci-fi\',\'action\');year=gt=2003' => {
+      "name=in=('sci-fi','action');year=gt=2003" => {
         type: :COMBINATION,
         operator: :AND,
         lhs: { type: :CONSTRAINT, selector: 'name', comparsion: '=in=', argument: [ 'sci-fi', 'action' ] },
         rhs: { type: :CONSTRAINT, selector: 'year', comparsion: '=gt=', argument: '2003' },
+      },
+      'name=in="test \' \" name"' => {
+        type: :CONSTRAINT,
+        selector: 'name' ,
+        comparsion: '=in=',
+        argument: 'test \' \\" name',
       }
     }.each do |key, output|
       assert_equal(RsqlRuby.parse(key.to_s), output)

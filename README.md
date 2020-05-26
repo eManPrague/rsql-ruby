@@ -1,6 +1,9 @@
 # rsql-ruby
 
-Ruby RSQL/FIQL parser library.
+Ruby RSQL/FIQL parser library. Big thanks for:
+
+* https://github.com/jirutka/rsql-parser
+* https://github.com/vmoebius/node-fiql-parser
 
 ## How to use?
 
@@ -23,7 +26,7 @@ Just open pull request with changes and proper test.
 
 (The MIT License)
 
-Copyright (c) 2020 eMan
+Copyright (c) 2020 Strnadj
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

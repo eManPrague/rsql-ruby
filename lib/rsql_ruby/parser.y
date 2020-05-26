@@ -28,7 +28,7 @@ rule
   array       : OPENING_BRACKET contents CLOSING_BRACKET { val[1] }
               | OPENING_BRACKET CLOSING_BRACKET { [] }
 
-  contents    : value { val }
+  contents    : value { [val[0]] }
               | contents OR_COMMA_OPERATOR value { val[0].push(val[2]); val[0] }
 
   value       : UNRESERVED
@@ -58,10 +58,6 @@ def create_constraint(selector, comparsion, argument)
     comparsion: comparsion,
     argument: argument
   }
-end
-
-def create_array(string)
-
 end
 
 ---- footer

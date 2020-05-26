@@ -1,3 +1,4 @@
 lib/rsql_ruby/lexer.rex.rb
 lib/rsql_ruby/parser.output
 lib/rsql_ruby/parser.rb
+.history
