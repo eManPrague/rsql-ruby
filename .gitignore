@@ -1,3 +1,3 @@
-lib/rsql-ruby/lexer.rex.rb
-lib/rsql-ruby/parser.output
-lib/rsql-ruby/parser.rb
+lib/rsql_ruby/lexer.rex.rb
+lib/rsql_ruby/parser.output
+lib/rsql_ruby/parser.rb
