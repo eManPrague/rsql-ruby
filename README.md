@@ -1,9 +1,11 @@
 # rsql-ruby
 
-Ruby RSQL/FIQL parser library. Big thanks for:
+Ruby RSQL/FIQL parser library. 
 
-* https://github.com/jirutka/rsql-parser
-* https://github.com/vmoebius/node-fiql-parser
+Kudos:
+
+* [Java RSQL parser](https://github.com/jirutka/rsql-parser)
+* [Node FIQL parser](https://github.com/vmoebius/node-fiql-parser)
 
 ## How to use?
 
